@@ -6,3 +6,9 @@ body {
 h1 {
   color: rgb(28, 111, 183);
 }
+
+caption.wide-caption {
+  font-size: 0.8em;
+  width: 150px;
+  font-style: italic;
+}
