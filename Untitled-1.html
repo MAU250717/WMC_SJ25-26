@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Text erweitern</title>
+  <style>
+    #mehrText {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <p id="text">Das ist ein kurzer Text.</p>
+  <div id="mehrText">Hier ist der erweiterte Teil des Textes, der beim Klick erscheint.</div>
+  <button id="mehrButton" onclick="zeigeMehr()">Mehr anzeigen</button>
+
+  <script>
+    function zeigeMehr() {
+      document.getElementById("mehrText").style.display = "block";
+      document.getElementById("mehrButton").style.display = "none";
+    }
+  </script>
+</body>
+</html>

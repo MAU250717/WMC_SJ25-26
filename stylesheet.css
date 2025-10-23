@@ -12,3 +12,8 @@ caption.wide-caption {
   width: 150px;
   font-style: italic;
 }
+
+.hidden {
+      display: none;
+      margin-top: 10px;
+    }
