@@ -2,24 +2,36 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Text erweitern</title>
+  <title>Text ein-/ausklappen</title>
   <style>
-    #mehrText {
+    #textbereich {
       display: none;
       margin-top: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <p id="text">Das ist ein kurzer Text.</p>
-  <div id="mehrText">Hier ist der erweiterte Teil des Textes, der beim Klick erscheint.</div>
-  <button id="mehrButton" onclick="zeigeMehr()">Mehr anzeigen</button>
+
+  <button onclick="toggleText()">Text anzeigen/verbergen</button>
+
+  <div id="textbereich">
+    Das ist der ein- und ausklappbare Textbereich. Du kannst hier beliebigen Inhalt einfügen.
+  </div>
 
   <script>
-    function zeigeMehr() {
-      document.getElementById("mehrText").style.display = "block";
-      document.getElementById("mehrButton").style.display = "none";
+    function toggleText() {
+      const textDiv = document.getElementById("textbereich");
+      if (textDiv.style.display === "none") {
+        textDiv.style.display = "block";
+      } else {
+        textDiv.style.display = "none";
+      }
     }
   </script>
+
 </body>
 </html>
+

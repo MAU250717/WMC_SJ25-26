@@ -1,4 +1,8 @@
-function zeigeMehr() {
-      document.getElementById("mehrText").style.display = "block";
-      document.getElementById("mehrButton").style.display = "none";
-    }
+function toggleText() {
+  const textDiv = document.getElementById("mehrText");
+  if (textDiv.style.display == "none") {
+   textDiv.style.display = "block";
+  } else {
+    textDiv.style.display = "none";
+  }
+}

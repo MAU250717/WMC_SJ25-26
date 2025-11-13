@@ -4,12 +4,13 @@
     <head>
           <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <title>
-            Hello World
+            My little Canvas
         </title>
     </head>
     <body>
         <h1>I am a little Philosopher</h1>
         <hr>
+        <img src="Cotedazur_Panorama.jpg" alt="A beautiful view of the Cote d'Azur" width="100%" height="20em">
         <section id="Einleitung">
             <h2>Einleitung</h2>
             <p>
@@ -26,13 +27,13 @@
             </table>
         </section>
         
-        <section id="container">
-            <div class="container">
+        <section id="about">
+             <div class="container">
                 <div class="grid-item-sidebar">
                     <h3>About Me</h3>
                     <p> Last Year I graduated from the High School in Vienna, Austria. <br>
                         I studied a lot there, but I was mainly interested in Music, Sience and Philosophy. <br>
-                        Now I want to explore the world of Web Development and Programming. Thats why I study in a College Inforamtik Technoligies,
+                        Now I want to explore the world of Web Development and Programming. Thats why I study in a College Informatik Technologies,
                         or IT for short.
                     </p>
                 </div>
@@ -49,7 +50,7 @@
             <div id="mehrText" class="hidden"> Wow, du hast den Button gefunden ^-^ <br>
                 Gratulation!! :) <br>
              Ich experimentiere hier nur einwenig mit Webside Development, also bitte nichts ernst nehmen </div>
-            <button id="mehrButton" onclick="zeigeMehr()">Mehr anzeigen</button>
+            <button onclick="toggleText()">Text anzeigen/verbergen</button>
         </p>
 
         
@@ -57,8 +58,8 @@
         <footer id="site-footer" role="contentinfo">
             <hr>
             <div class="footer-inner">
-                <section class="contact" aria-labelledby="contact-heading">
-                    <h3 id="contact-heading">Contacts</h3>
+                <section class="contact" aria-labelledby="contact" id ="contact">
+                    <h3 id="contact">Contacts</h3>
                     <address>
                         <strong>Fancypantsy Philosopher</strong><br>
                         123 Example Street<br>
@@ -68,10 +69,10 @@
                     </address>
                 </section>
 
-                <section class="social" aria-label="Social links">
+                <section class="social" aria-label="Social links" id="social">
                     <h4 class="visually-hidden">Social</h4>
                     <ul class="social-list">
-                        <li><a href="#" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="https://github.com/MAU250717" rel="noopener noreferrer">GitHub</a></li>
                         <li><a href="#" rel="noopener noreferrer">Twitter</a></li>
                         <li><a href="#" rel="noopener noreferrer">LinkedIn</a></li>
                     </ul>
@@ -81,7 +82,4 @@
             <small>&copy; 2025 Fancypantsy Philosopher. All rights reserved.</small>
         </footer>
     </body>
-
-
-
 </html>
