@@ -2,36 +2,94 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Text ein-/ausklappen</title>
+  <title>Symbol-Sidebar</title>
   <style>
-    #textbereich {
-      display: none;
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Sidebar-Grundstruktur */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 60px; /* Nur Symbol sichtbar */
+      background-color: #333;
+      overflow-x: hidden;
+      transition: width 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar:hover {
+      width: 200px; /* Ausgeklappt */
+    }
+
+    /* Symbol oben */
+    .menu-icon {
+      font-size: 30px;
+      color: white;
+      text-align: center;
+      padding: 16px 0;
+      cursor: pointer;
+    }
+
+    /* Navigationslinks */
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+    }
+
+    .nav-links a {
+      display: block;
+      color: white;
+      padding: 16px;
+      text-decoration: none;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar:hover .nav-links a {
+      opacity: 1;
+    }
+
+    .nav-links a:hover {
+      background-color: #575757;
+    }
+
+    /* Seiteninhalt */
+    .content {
+      margin-left: 60px;
+      padding: 20px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .sidebar:hover ~ .content {
+      margin-left: 200px;
     }
   </style>
 </head>
 <body>
 
-  <button onclick="toggleText()">Text anzeigen/verbergen</button>
-
-  <div id="textbereich">
-    Das ist der ein- und ausklappbare Textbereich. Du kannst hier beliebigen Inhalt einfügen.
+  <div class="sidebar">
+    <div class="menu-icon">☰</div>
+    <div class="nav-links">
+      <a href="#home">Startseite</a>
+      <a href="#about">Über uns</a>
+      <a href="#services">Leistungen</a>
+      <a href="#contact">Kontakt</a>
+    </div>
   </div>
 
-  <script>
-    function toggleText() {
-      const textDiv = document.getElementById("textbereich");
-      if (textDiv.style.display === "none") {
-        textDiv.style.display = "block";
-      } else {
-        textDiv.style.display = "none";
-      }
-    }
-  </script>
+  <div class="content">
+    <section id="home"><h1>Startseite</h1><p>Willkommen auf unserer Webseite!</p></section>
+    <section id="about"><h1>Über uns</h1><p>Hier erfährst du mehr über uns.</p></section>
+    <section id="services"><h1>Leistungen</h1><p>Unsere Angebote im Überblick.</p></section>
+    <section id="contact"><h1>Kontakt</h1><p>So kannst du uns erreichen.</p></section>
+  </div>
 
 </body>
 </html>
-

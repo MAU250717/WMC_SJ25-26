@@ -3,6 +3,8 @@
 body {
   background-color: #d5b570;
   padding: 1em;
+  margin-left: 60px;
+  
 }
 h1 {
   color: #1c6fb7;
@@ -26,9 +28,9 @@ h3 {
 }
 
 .hidden {
-      display: none;
-      margin-top: 10px;
-      margin-bottom: 10px;
+  display: none;
+  margin-top: 10px;
+   margin-bottom: 10px;
 }
 
 .container {
@@ -88,4 +90,62 @@ h3 {
 
 .social-list a:hover {
   text-decoration: underline;
+}
+
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  height:100%;
+  width:60px;
+  background-color:#333;
+  overflow-x:hidden;
+  transition:width 0.3s ease;
+  z-index:1000
+}
+
+.sidebar:hover{
+  width:200px
+}
+
+.menu-icon{
+  font-size:30px;
+  color:#fff;
+  text-align:center;
+  padding:16px 0;
+  cursor:pointer
+}
+
+.nav-links{
+  display:flex;
+  flex-direction:column;
+  margin-top:40px
+}
+
+.nav-links a{
+  display:block;
+  color:#fff;
+  padding:16px;
+  text-decoration:none;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity 0.3s ease
+}
+
+.sidebar:hover .nav-links a{
+  opacity:1
+}
+
+.nav-links a:hover{
+  background-color:#575757
+}
+
+.content{
+  margin-left:60px;
+  padding:20px;
+  transition:margin-left 0.3s ease
+}
+
+.sidebar:hover~.content{
+  margin-left:200px
 }
