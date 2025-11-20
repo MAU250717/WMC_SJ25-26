@@ -36,7 +36,7 @@ h3 {
 .container {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr auto 1fr;
+  grid-template-rows: 3fr 1fr;
   grid-template-areas:
     "header header"
     "sidebar main"
@@ -59,6 +59,15 @@ h3 {
   padding: 20px;
   text-align: left;
   font-size: 1.5em;
+  padding: 0.5em;
+}
+
+.grid-item-bottom{
+  background-color: #ffffff;
+  color: black;
+  padding: 20px;
+  text-align: left;
+  font-size: 1em;
   padding: 0.5em;
 }
 
