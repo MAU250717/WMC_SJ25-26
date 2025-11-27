@@ -1,5 +1,6 @@
 /* stylesheet.css */
 
+/* Loose Test */
 body {
   background-color: #d5b570;
   padding: 1em;
@@ -13,6 +14,17 @@ h1 {
   padding-left: 1em;
 }
 
+.comment {
+  margin: 2em 0;
+  color: black;
+} 
+
+h3 {
+  text-align: center;
+  font-size: 25px;
+}
+
+/* other */
 .hidden {
   display: none;
 }
@@ -24,9 +36,7 @@ caption.wide-caption {
   padding-bottom: 5em;
 }
 
-h3 {
-  text-align: center;
-}
+
 
 .hidden {
   display: none;
@@ -48,25 +58,22 @@ h3 {
 .grid-item-main{
   background-color: #da9a23;
   color: black;
-  padding: 20px;
-  text-align: center;
-  font-size: 1.5em;
-  padding: 0.5em;
+  text-align: left;
+  font-size: 1.2em;
+  padding: 1em;
 }
 
 .grid-item-sidebar{
   background-color: #ffab10;
   color: black;
-  padding: 20px;
   text-align: left;
-  font-size: 1.5em;
-  padding: 0.5em;
+  font-size: 1.2em;
+  padding: 1em;
 }
 
 .grid-item-bottom{
   background-color: #ffffff;
   color: black;
-  padding: 20px;
   text-align: left;
   font-size: 1em;
   padding: 0.5em;
@@ -105,18 +112,19 @@ h3 {
 .sidebar{
   position:fixed;
   top:0;
-  left:0;
+  left: 0; /* versteckt */
   height:100%;
-  width:60px;
+  width: 60px;
   background-color:#333;
   overflow-x:hidden;
-  transition:width 0.3s ease;
+  transition:left 0.3s ease;
   z-index:1000
 }
 
-.sidebar:hover{
-  width:200px
+.sidebar:hover {
+  width: 200px;; /* sichtbar */
 }
+
 
 .menu-icon{
   font-size:30px;
@@ -159,3 +167,4 @@ h3 {
 .sidebar:hover~.content{
   margin-left:200px
 }
+

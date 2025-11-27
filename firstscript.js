@@ -6,3 +6,4 @@ function toggleText() {
     textDiv.style.display = "none";
   }
 }
+
