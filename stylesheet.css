@@ -12,6 +12,10 @@ h1 {
   font-size: 2.5em;
   font-family:'Lucida Handwriting', cursive;
   padding-left: 1em;
+
+  @media(width >900px) {
+    font-size: 3em;
+  }
 }
 
 .comment {
@@ -82,12 +86,21 @@ caption.wide-caption {
 .contact {
   flex: 1 1 300px;
   margin-bottom: 20px;
-}
 
-.contact h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  text-align: left;
+  a {
+    color: #0054a9;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    text-align: left;
+  }
 }
 
 
@@ -98,15 +111,15 @@ caption.wide-caption {
 .social-list {
   padding: 0;
   margin: 10px;
-}
 
-.social-list a {
+ a {
   color: #0054a9;
   text-decoration: none;
-}
-
-.social-list a:hover {
-  text-decoration: underline;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 .sidebar{
@@ -121,12 +134,18 @@ caption.wide-caption {
   z-index:1000
 }
 
-.sidebar:hover {
-  width: 200px;; /* sichtbar */
+.sidebar:hover,
+.sidebar.open {
+  width: 200px;
+   /*sichtbar*/
 }
 
+.sidebar:hover .nav-links a,
+.sidebar.open .nav-links a{
+  opacity:1
+}
 
-.menu-icon{
+.toggle-btn{
   font-size:30px;
   color:#fff;
   text-align:center;
@@ -150,9 +169,6 @@ caption.wide-caption {
   transition:opacity 0.3s ease
 }
 
-.sidebar:hover .nav-links a{
-  opacity:1
-}
 
 .nav-links a:hover{
   background-color:#575757
