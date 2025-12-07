@@ -5,8 +5,16 @@ body {
   background-color: #d5b570;
   padding: 1em;
   margin-left: 60px;
-  
 }
+
+/* Media query for screens smaller than 900px */
+@media screen and (max-width: 900px) {
+  body {
+    font-size: large;
+  }
+}
+
+
 h1 {
   color: #15558e;
   font-size: 2.5em;
