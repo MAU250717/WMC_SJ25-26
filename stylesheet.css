@@ -36,6 +36,13 @@ h3 {
   font-size: 25px;
 }
 
+.vector-input {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  width: 5%;
+}
+
 /* other */
 .hidden {
   display: none;
@@ -47,8 +54,6 @@ caption.wide-caption {
   font-style: italic;
   padding-bottom: 5em;
 }
-
-
 
 .hidden {
   display: none;
