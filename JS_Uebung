@@ -1,0 +1,58 @@
+> const students = [
+  { name: "Anna", age: 17, grade: 2 },
+  { name: "Ben", age: 16, grade: 4 },
+  { name: "Clara", age: 18, grade: 1 },
+  { name: "David", age: 17, grade: 5 },
+  { name: "Elena", age: 16, grade: 3 },
+  { name: "Felix", age: 19, grade: 2 },
+  { name: "Gina", age: 17, grade: 1 },
+  { name: "Hugo", age: 18, grade: 4 },
+];
+undefined
+> //Task 1 – filter: Find all students who passed (grade ≤ 4). Store the result in passed.
+undefined
+> const passed = students.filter(student => student.grade <= 4);
+undefined
+> passed
+[
+  { name: "Anna", age: 17, grade: 2 },
+  { name: "Ben", age: 16, grade: 4 },
+  { name: "Clara", age: 18, grade: 1 },
+  { name: "Elena", age: 16, grade: 3 },
+  { name: "Felix", age: 19, grade: 2 },
+  { name: "Gina", age: 17, grade: 1 },
+  { name: "Hugo", age: 18, grade: 4 }
+]
+> const labels = students.map(person => `${person.name} (${person.age})`);
+undefined
+> labels
+[
+  "Anna (17)",
+  "Ben (16)",
+  "Clara (18)",
+  "David (17)",
+  "Elena (16)",
+  "Felix (19)",
+  "Gina (17)",
+  "Hugo (18)"
+]
+> const passedNames = passed.map(person => `${person.name} (${person.age})`);
+undefined
+> passedNames
+[
+  "Anna (17)",
+  "Ben (16)",
+  "Clara (18)",
+  "Elena (16)",
+  "Felix (19)",
+  "Gina (17)",
+  "Hugo (18)"
+]
+> // Task 4 – reduce: Calculate the average grade of all students. Store it in averageGrade.
+undefined
+> const totalGrade = students.reduce((sum, student) => sum + student.grade, 0);
+undefined
+> const averageGrade = totalGrade / students.length;
+undefined
+> averageGrade
+2.75
