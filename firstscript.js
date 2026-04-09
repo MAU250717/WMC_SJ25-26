@@ -35,4 +35,19 @@ sidebar.addEventListener("mouseleave", () => {
     }
 });
 
+// Aktuellen Dateinamen holen (z.B. "about.html")
+const currentPage = window.location.pathname.split("/").pop();
+
+// Alle Nav-Links durchgehen
+const navLinks = document.querySelectorAll(".nav-links a");
+
+navLinks.forEach(link => {
+    // Dateiname des Links holen
+    const linkPage = link.getAttribute("href");
+
+    if (linkPage === currentPage) {
+        link.classList.add("active");
+    }
+});
+
 
