@@ -2,55 +2,67 @@
 <html lang="de">
     
     <head>
-          <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <title>
-            My little Canvas
+            My little Canvas · Fancypantsy Philosopher
         </title>
     </head>
     <body>
+        <!-- ── Sidebar ─────────────────────────────────────────────── -->
         <div class="sidebar" id="sidebar">
-        <div class="toggle-btn" id="toggleBtn">☰</div>
-        <div class="nav-links">
+            <div class="toggle-btn" id="toggleBtn">☰</div>
+            <div class="nav-links">
             <a href="#home">Startseite</a>
             <a href="#about">Über uns</a>
             <a href="#services">Leistungen</a>
             <a href="vektorrechner.html">Vektorrechner</a>
             <a href="#contact">Kontakt</a>
-        </div>
+            </div>
         </div>
 
+        <!-- ── Hero ────────────────────────────────────────────────── -->
         <section id="home">
-        <h1>I am a little Philosopher</h1>
-        <hr>
-        <img src="Cotedazur_Panorama.jpg" alt="A beautiful view of the Cote d'Azur" style="width: 100%; height: 100%;">
-        <section id="Einleitung">
-            <h2>Einleitung</h2>
-            <p>
-               
-                Ich habe mich noch nie so gelangweilt. Deshalb werde ich die ganze Stunde schlafen.<br>
-                Ich bin wütend auf meinen Vater. 
-                Er hat mir Unrecht getan und mir nie ein Lied vorgesungen. Warum? 
-                Er war ein trauriger Mann und hat mich seit meiner Geburt vernachlässigt.
-                Ich kann ihm nicht böse sein, es war sein erstes Mal hier, 
-                aber auch mein erstes Mal, deshalb bin ich traurig.
-            </p>
-            <table>
-                <caption class="wide-caption">by Fancypantsy Philosopher</caption>
-            </table>
+            <h1>I am a little Philosopher</h1>
+            <hr>
+            <div class="hero-img-wrap">
+                <img src="Cotedazur_Panorama.jpg" alt="A beautiful view of the Cote d'Azur" style="width: 100%; height: 100%;">
+                <div class="hero-img-overlay"></div>
+                <span class="hero-caption">Côte d'Azur · Nice, France</span>
+            </div>
+            <div id="Einleitung">
+                <h2>Einleitung</h2>
+                <p>
+                
+                    Ich habe mich noch nie so gelangweilt. Deshalb werde ich die ganze Stunde schlafen.<br>
+                    Ich bin wütend auf meinen Vater. 
+                    Er hat mir Unrecht getan und mir nie ein Lied vorgesungen. Warum? 
+                    Er war ein trauriger Mann und hat mich seit meiner Geburt vernachlässigt.
+                    Ich kann ihm nicht böse sein, es war sein erstes Mal hier, 
+                    aber auch mein erstes Mal, deshalb bin ich traurig.
+                </p>
+                <table>
+                    <caption class="wide-caption">by Fancypantsy Philosopher</caption>
+                </table>
+            </div>
         </section>
-        </section>
+
+        <!-- ── About ───────────────────────────────────────────────── -->
         <section id="about">
              <div class="container">
                 <div class="grid-item-sidebar">
                     <h3>About Me</h3>
-                    <p> Letztes Jahr habe ich die Oberstufe in Wien, Österreich, abgeschlossen. <br>
+                    <p> 
+                        Letztes Jahr habe ich die Oberstufe in Wien, Österreich, abgeschlossen. <br>
                         Ich habe dort viel gelernt, aber mein Interesse galt vor allem Musik, Naturwissenschaften und Philosophie. <br>
                         Jetzt möchte ich die Welt der Webentwicklung und Programmierung erkunden. Deshalb studiere ich an einer Hochschule Informatik-Technologien,kurz IT.
                     </p>
                 </div>
                 <div class="grid-item-main">
                     <h3>My Philosophy</h3>
-                    <p> Meine Philosophie basiert auf Neugier, Klarheit und Sinn. Ich glaube, dass Wissen geteilt werden sollte,
+                    <p> 
+                        Meine Philosophie basiert auf Neugier, Klarheit und Sinn. Ich glaube, dass Wissen geteilt werden sollte,
                         um Menschen zu inspirieren und zu verbinden. Jeder Gedanke ist ein Schritt zu mehr Verständnis, jede Frage öffnet neue Türen. 
                         Meine Philosophie ist, bewusst zu leben, kritisch zu denken und stets nach Wahrheit und Bedeutung zu suchen ein Weg zu innerem Wachstum.
                     </p>
@@ -58,10 +70,11 @@
             </div>
         </section>
         
+        <!-- ── Services ────────────────────────────────────────────── -->
         <section id="services">
             <div class="grid-item-bottom">
                 <h3>Leistungen</h3>
-                Ich biete folgende Dienstleistungen an:
+                <p style="margin-bottom:.3rem;">Ich biete folgende Dienstleistungen an:</p>
                 <ul>
                     <li>Philosophical Consultations</li>
                     <li>Music Composition</li>
@@ -71,13 +84,15 @@
             </div>
         </section>
         
+        <!-- ── Comment ─────────────────────────────────────────────── -->
         <div class="comment">
-        Ich hoffe, dir gefällt meine kleine Webseite! <br>
-        Viel Spaß beim Erkunden! :) <br>
-        Ich wünsche jedem einen wundervollen Tag! Auch wenn das Leben manchmal hart ist, es gibt immer etwas Schönes zu entdecken. <br>
+            Ich hoffe, dir gefällt meine kleine Webseite! <br>
+            Viel Spaß beim Erkunden! :) <br>
+            Ich wünsche jedem einen wundervollen Tag! Auch wenn das Leben manchmal hart ist, es gibt immer etwas Schönes zu entdecken. <br>
         </div>
         
-        <section>
+        <!-- ── Abschluss ────────────────────────────────────────────── -->
+        <section style="background:var(--sand);">
             <h2>Abschluss</h2>
             <p>
                 Vielen Dank für deinen Besuch auf meiner Webseite. <br>
@@ -88,20 +103,21 @@
             </p>
         </section>
 
-        <script src="firstscript.js"></script>
-        <p>
-            <div id="mehrText" class="hidden"> Wow, du hast den Button gefunden ^-^ <br>
-                Gratulation!! :) <br>
-             Ich experimentiere hier nur einwenig mit Webside Development, also bitte nichts ernst nehmen </div>
-            <button onclick="toggleText()">Text anzeigen/verbergen</button>
-
-
+        <!-- ── Button ──────────────────────────────────────────────── -->
+        <div class="secret-section">
+            <div id="mehrText">
+                Wow, du hast den Button gefunden ^-^<br>
+                Gratulation!! :)<br>
+                Ich experimentiere hier nur ein wenig mit Web Development, also bitte nichts ernst nehmen&nbsp;✨
+            </div>
+            <button class="toggle-text-btn" onclick="toggleText()">Text anzeigen / verbergen</button>
+        </div>
         
-
+        <!-- ── Footer ──────────────────────────────────────────────── -->
         <footer id="site-footer">
             <hr>
             <div class="footer-inner">
-                <section class="contact" aria-labelledby="contact" id ="contact">
+                <section class="contact" aria-labelledby="contact-heading" id ="contact">
                     <h3>Contacts</h3>
                     <address>
                         <strong>Fancypantsy Philosopher</strong><br>
@@ -114,7 +130,7 @@
 
                 <!-- Social Media Links -->
                 <section class="social" aria-label="Social links" id="social">
-                    <h4 class="visually-hidden">Social</h4>
+                    <h4>Socials</h4>
                     <ul class="social-list">
                         <li><a href="https://github.com/MAU250717" rel="noopener noreferrer">GitHub</a></li>
                         <li><a href="#" rel="noopener noreferrer">Twitter</a></li>
@@ -125,5 +141,7 @@
 
             <small>&copy; 2025 Fancypantsy Philosopher. All rights reserved.</small>
         </footer>
+    
+    <script src="firstscript.js"></script>
     </body>
 </html>
