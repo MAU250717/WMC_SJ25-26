@@ -33,6 +33,18 @@ function renderPersons() {
     }
 }
 
+const thId = document.getElementById("thid");
+let thIdAsc = true;
+thId.addEventListener("click", () => {
+    console.log("thId was clicked");
+    persons.sort((a, b) => {
+        if (thIdAsc) return a.id - b.id;
+        else return b.id - a.id;
+    });
+    thIdAsc = !thIdAsc;
+    renderPersons();
+});
+
 const thname = document.getElementById("thname");
 let thnameAsc = true;
 thname.addEventListener("click", () => {
@@ -57,15 +69,15 @@ thage.addEventListener("click", () => {
     renderPersons();
 });
 
-const thsize = document.getElementById("thsize");
-let thsizeAsc = true;
+const thsize = document.getElementById("thheight");
+let thheightAsc = true;
 thsize.addEventListener("click", () => {
     console.log("thsize was clicked");
     persons.sort((a, b) => {
-        if (thsizeAsc) return a.groesse - b.groesse;
+        if (thheightAsc) return a.groesse - b.groesse;
         else return b.groesse - a.groesse;
     });
-    thsizeAsc = !thsizeAsc;
+    thheightAsc = !thheightAsc;
     renderPersons();
 });
 
