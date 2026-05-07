@@ -2,12 +2,13 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My little Canvas; Vektorrechner</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
-<body>
+<body class="vektorrechner-page">
 
-<header>
+<header class="vk-header">
     <h1>Vektor<span>rechner</span></h1>
     <p>Addition &amp; Skalarprodukt · n-dimensional</p>
 </header>
@@ -65,148 +66,145 @@
 </div>
 
 <script>
-// ─── Vektor Klasse (aus Java übersetzt) ───────────────────────────────────────
-class Vektor {
-    constructor(arg) {
-        if (Array.isArray(arg)) {
-            // Vektor(int[] v)
-            this.setVektor(arg);
-        } else if (typeof arg === 'number') {
-            // Vektor(int dim)
-            this.dim = arg;
-            this.v = new Array(arg).fill(0);
+    class Vektor {
+        constructor(arg) {
+            if (Array.isArray(arg)) {
+                // Vektor(int[] v)
+                this.setVektor(arg);
+            } else if (typeof arg === 'number') {
+                // Vektor(int dim)
+                this.dim = arg;
+                this.v = new Array(arg).fill(0);
+            }
+        }
+
+        setVektor(v) {
+            if (v != null) {
+                this.dim = v.length;
+                this.v = [...v];
+            } else {
+                console.error("Fehler: Vektor darf nicht NULL sein");
+            }
+        }
+
+        getVektor() {
+            return this.v;
+        }
+
+        add(other) {
+            if (!other)
+                return { error: "Der andere Vektor ist NULL!" };
+            if (this.dim !== other.dim) 
+                return { error: "Dimensionen stimmen nicht überein!" };
+            const erg = new Vektor(this.dim);
+            for (let i = 0; i < this.dim; i++) {
+                erg.v[i] = this.v[i] + other.v[i];
+            }
+            return erg;
+        }
+
+        dot(other) {
+            if (!other)
+                return { error: "Der andere Vektor ist NULL!" };
+            if (this.dim !== other.dim)
+                return { error: "Dimensionen stimmen nicht überein!" };
+            let sum = 0;
+            for (let i = 0; i < this.dim; i++)
+                sum += this.v[i] * other.v[i];
+            return sum;
         }
     }
 
-    setVektor(v) {
-        if (v !== null && v !== undefined) {
-            this.dim = v.length;
-            this.v = [...v];
-        } else {
-            console.error("Fehler: Vektor darf nicht NULL sein");
-        }
+    // ─── UI Logik ─────────────────────────────────────────────────────────────────
+    let currentDim = 2;
+
+    function buildInputs(dim) {
+        ['A', 'B'].forEach(label => {
+            const container = document.getElementById(`inputs${label}`);
+            container.innerHTML = '';
+            for (let i = 0; i < dim; i++) {
+                const inp = document.createElement('input');
+                inp.type = 'number';
+                inp.className = 'vector-input';
+                inp.placeholder = '0';
+                inp.id = `v${label}_${i}`;
+                inp.setAttribute('aria-label', `Vektor ${label}, Komponente ${i + 1}`);
+                container.appendChild(inp);
+            }
+        });
     }
 
-    getVektor() {
-        return this.v;
-    }
-
-    add(other) {
-        if (other === null || other === undefined) {
-            return { error: "Der andere Vektor ist NULL!" };
-        }
-        if (this.dim !== other.dim) {
-            return { error: "Dimensionen stimmen nicht überein!" };
-        }
-        const erg = new Vektor(this.dim);
-        for (let i = 0; i < this.dim; i++) {
-            erg.v[i] = this.v[i] + other.v[i];
-        }
-        return erg;
-    }
-
-    dot(other) {
-        if (other === null || other === undefined) {
-            return { error: "Der andere Vektor ist NULL!" };
-        }
-        if (this.dim !== other.dim) {
-            return { error: "Dimensionen stimmen nicht überein!" };
-        }
-        let sum = 0;
-        for (let i = 0; i < this.dim; i++) {
-            sum += this.v[i] * other.v[i];
-        }
-        return sum;
-    }
-}
-
-// ─── UI Logik ─────────────────────────────────────────────────────────────────
-let currentDim = 2;
-
-function buildInputs(dim) {
-    ['A', 'B'].forEach(label => {
-        const container = document.getElementById(`inputs${label}`);
-        container.innerHTML = '';
-        for (let i = 0; i < dim; i++) {
-            const inp = document.createElement('input');
-            inp.type = 'number';
-            inp.className = 'vector-input';
-            inp.placeholder = '0';
-            inp.value = '';
-            inp.id = `v${label}_${i}`;
-            container.appendChild(inp);
-        }
-    });
-}
-
-function getVector(label) {
-    const vals = [];
-    for (let i = 0; i < currentDim; i++) {
-        const el = document.getElementById(`v${label}_${i}`);
-        vals.push(Number(el.value) || 0);
-    }
-    return new Vektor(vals);
-}
-
-function calculate(op) {
-    const a = getVector('A');
-    const b = getVector('B');
-    const panel = document.getElementById('resultPanel');
-    const sym = document.getElementById('opSymbol');
-
-    if (op === 'add') {
-        sym.textContent = '+';
-        const result = a.add(b);
-        if (result.error) {
-            panel.innerHTML = `<span class="result-error">⚠ ${result.error}</span>`;
-        } else {
-            const vals = result.getVektor().map(n =>
-                `<span class="result-val">${n}</span>`
-            ).join('');
-            panel.innerHTML = `
-                <span class="result-label">= Vektor</span>
-                <div class="result-values">${vals}</div>`;
-        }
-    } else if (op === 'dot') {
-        sym.textContent = '·';
-        const result = a.dot(b);
-        if (result && result.error) {
-            panel.innerHTML = `<span class="result-error">⚠ ${result.error}</span>`;
-        } else {
-            panel.innerHTML = `
-                <span class="result-label">= Skalar</span>
-                <span class="result-scalar">${result}</span>`;
-        }
-    }
-}
-
-function reset() {
-    ['A', 'B'].forEach(label => {
+    function getVector(label) {
+        const vals = [];
         for (let i = 0; i < currentDim; i++) {
             const el = document.getElementById(`v${label}_${i}`);
-            if (el) el.value = '';
+            vals.push(Number(el.value) || 0);
         }
-    });
-    document.getElementById('resultPanel').innerHTML =
-        '<span class="result-empty">← Wähle eine Operation</span>';
-    document.getElementById('opSymbol').textContent = '+';
-}
+        return new Vektor(vals);
+    }
 
-// Dimension buttons
-document.querySelectorAll('.dim-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.dim-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentDim = parseInt(btn.dataset.dim);
-        buildInputs(currentDim);
+    function calculate(op) {
+        const a = getVector('A');
+        const b = getVector('B');
+        const panel = document.getElementById('resultPanel');
+        const sym = document.getElementById('opSymbol');
+
+        if (op === 'add') {
+            sym.textContent = '+';
+            const result = a.add(b);
+            if (result.error) {
+                panel.innerHTML = `<span class="result-error">⚠ ${result.error}</span>`;
+            } 
+            else {
+                const vals = result.getVektor().map(n =>
+                    `<span class="result-val">${n}</span>`
+                ).join('');
+                panel.innerHTML = `
+                    <span class="result-label">= Vektor</span>
+                    <div class="result-values">${vals}</div>`;
+            }
+        } else if (op === 'dot') {
+            sym.textContent = '·';
+            const result = a.dot(b);
+            if (result && result.error) {
+                panel.innerHTML = `<span class="result-error">⚠ ${result.error}</span>`;
+            } else {
+                panel.innerHTML = `
+                    <span class="result-label">= Skalar</span>
+                    <span class="result-scalar">${result}</span>`;
+            }
+        }
+    }
+
+    function reset() {
+        ['A', 'B'].forEach(label => {
+            for (let i = 0; i < currentDim; i++) {
+                const el = document.getElementById(`v${label}_${i}`);
+                if (el) el.value = '';
+            }
+        });
         document.getElementById('resultPanel').innerHTML =
             '<span class="result-empty">← Wähle eine Operation</span>';
-    });
-});
+        document.getElementById('opSymbol').textContent = '+';
+    }
 
-// Init
-buildInputs(currentDim);
-</script>
+    // Dimension buttons
+    document.querySelectorAll('.dim-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.dim-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentDim = parseInt(btn.dataset.dim);
+            buildInputs(currentDim);
+            reset();
+        });
+    });
+
+    // Init
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Enter') calculate('add');
+    });
+    buildInputs(currentDim);
+    </script>
 
 </body>
 </html>

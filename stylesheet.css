@@ -1,10 +1,44 @@
 /* stylesheet.css */
 
+:root {
+  --azure:        #1a6fa8;
+  --azure-dark:   #0d4f7a;
+  --azure-light:  #4a9fd4;
+  --gold:         #c9963a;
+  --gold-light:   #e8b85a;
+  --sand:         #f5ead6;
+  --sand-dark:    #e8d4b0;
+  --cream:        #fdf8f0;
+  --text:         #1c2b3a;
+  --text-light:   #5a7080;
+  --white:        #ffffff;
+
+  --sidebar-w:    68px;
+  --sidebar-open: 210px;
+  --radius:       12px;
+  --shadow:       0 4px 24px rgba(26,111,168,.13);
+  --shadow-card:  0 8px 32px rgba(26,111,168,.10);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
 /* Loose Test */
 body {
-  background-color: #d5b570;
-  padding: 1em;
-  margin-left: 60px;
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(ellipse at 80% 0%, rgba(26,111,168,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(201,150,58,.06) 0%, transparent 50%);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text);
+  margin-left: var(--sidebar-w);
+  transition: margin-left .3s ease;
+  min-height: 100vh;
 }
 
 /* Media query for screens smaller than 900px */
@@ -16,10 +50,13 @@ body {
 
 
 h1 {
-  color: #15558e;
-  font-size: 2.5em;
-  font-family:'Lucida Handwriting', cursive;
-  padding-left: 1em;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--azure-dark);
+  letter-spacing: .02em;
+  line-height: 1.15;
+  padding: .4em 0 .2em 1em;
 
   @media(width >900px) {
     font-size: 3em;
