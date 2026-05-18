@@ -143,6 +143,11 @@
         return new Vektor(vals);
     }
 
+    function setActiveOp(op) {
+        document.querySelectorAll('.op-btn').forEach(btn => btn.classList.remove('primary'));
+        document.querySelector(`.op-btn[onclick="calculate('${op}')"]`).classList.add('primary');
+    }
+
     function calculate(op) {
         const a = getVector('A');
         const b = getVector('B');
@@ -150,6 +155,7 @@
         const sym = document.getElementById('opSymbol');
 
         if (op === 'add') {
+            setActiveOp('add'); // Aktiviere Additionstaste
             sym.textContent = '+';
             const result = a.add(b);
             if (result.error) {
@@ -164,6 +170,7 @@
                     <div class="result-values">${vals}</div>`;
             }
         } else if (op === 'dot') {
+            setActiveOp('dot'); // Aktiviere Skalarprodukttaste
             sym.textContent = '·';
             const result = a.dot(b);
             if (result && result.error) {
@@ -186,6 +193,7 @@
         document.getElementById('resultPanel').innerHTML =
             '<span class="result-empty">← Wähle eine Operation</span>';
         document.getElementById('opSymbol').textContent = '+';
+        setActiveOp('add');
     }
 
     // Dimension buttons
