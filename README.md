@@ -1,1 +1,1 @@
-##Little School Project (I am a little Philosopher)
+# Little School Project (I am a little Philosopher)
