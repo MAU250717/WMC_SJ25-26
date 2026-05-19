@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NASA Galerie - APOD Live</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+  
+    <!-- Sidebar -->
+    <nav class="sidebar">
+    <div class="toggle-btn">☰</div>
+    <div class="nav-links">
+      <a href="#home" class="active">Start</a>
+      <a href="#galerie">Galerie</a>
+    </div>
+  </nav>
+
+  <main class="content">
+
+    <!-- Hero -->
+    <section id="home">
+      <div class="hero-img-wrap">
+        <img src="https://images-assets.nasa.gov/image/PIA12235/PIA12235~orig.jpg">
+        <div class="hero-img-overlay"></div>
+        <div class="hero-caption">NASA APOD - Live Galerie</div>
+      </div>
+    </section>
+
+    <!-- Einleitung -->
+    <section id="Einleitung">
+      <h1>NASA APOD Galerie</h1>
+      <p>
+        Diese Galerie lädt automatisch sechs zufällige Bilder aus der NASA-API.
+        Du kannst Bilder löschen, neu laden oder die Galerie komplett ersetzen.
+      </p>
+    </section>
+
+    <!-- Galerie -->
+    <section id="galerie">
+      <h2>Aktuelle Bilder</h2>
+
+      <button id="reloadBtn" class="toggle-text-btn" style="margin-bottom:1rem;">
+        Galerie neu laden
+      </button>
+
+      <div id="gallery" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;">
+      </div>
+
+      <p id="status" style="margin-top:1rem;color:var(--text-light);">
+        Lade Bilder …
+      </p>
+    </section>
+
+    <section class="comment">
+      „Jedes dieser Bilder ist ein kleiner Blick in die Tiefe des Kosmos –
+      und vielleicht auch ein bisschen in dich selbst.“
+    </section>
+
+    <!-- Footer -->
+    <footer id="site-footer">
+      <div class="footer-inner">
+        <div class="contact">
+          <h3>Kontakt</h3>
+          <address>
+            Space Enthusiast<br>
+            <a href="mailto:space@example.com">space@example.com</a>
+          </address>
+        </div>
+      </div>
+      <small>NASA APOD Daten – DEMO_KEY</small>
+    </footer>
+
+  </main>
+
+  <script src="AstroScript.js"></script>
+  
+</body>
+
+</html>
