@@ -13,7 +13,7 @@ async function loadPictures() {
 
   try {
     const res = await fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=6"
+      "https://api.nasa.gov/planetary/apod?api_key=ZHYkiiY9eCZDdZDRbxEKSky6SZtl1nabKLZgcwSM&count=5"
     );
     const data = await res.json();
 
