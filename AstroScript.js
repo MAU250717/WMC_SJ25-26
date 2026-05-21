@@ -1,7 +1,7 @@
-
 const gallery = document.getElementById("gallery");
 const statusText = document.getElementById("status");
 const reloadBtn = document.getElementById("reloadBtn");
+const addOneBtn = document.getElementById("addOneBtn");
 
 let pictureArray = [];
 
@@ -73,7 +73,8 @@ function renderGallery() {
 
     fig.innerHTML = `
       <img src="${pic.url}" alt="${pic.title}"
-            style="width:100%;height:220px;object-fit:cover;">
+           style="width:100%;height:220px;object-fit:cover;cursor:zoom-in;transition:opacity .2s;"
+           data-lightbox="${index}">
       <figcaption style="padding:.8rem 1rem;">
         <strong style="color:var(--azure-dark);">${pic.title}</strong><br>
         <span style="font-size:.8rem;color:var(--text-light);">${pic.date}</span>
@@ -105,11 +106,7 @@ function renderGallery() {
 // Bild löschen (DOM + Array)
 function deletePicture(event) {
   const index = Number(event.target.dataset.index);
-
-  // Aus Array entfernen
   pictureArray.splice(index, 1);
-
-  // Galerie neu rendern
   renderGallery();
 
   if (pictureArray.length === 0) {
