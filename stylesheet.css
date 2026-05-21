@@ -598,6 +598,7 @@ body.vektorrechner-page {
   text-align: center;
   outline: none;
   transition: border-color .2s, background .2s, box-shadow .2s;
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 
