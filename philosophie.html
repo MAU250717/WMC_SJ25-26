@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Philosophie — Das Staunen als Anfang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- ════ Stylesheet einbinden ════ -->
+  <style>
+/* ─── CSS-Variablen (aus stylesheet.css) ─── */
+:root {
+  --azure:        #1a6fa8;
+  --azure-dark:   #0d4f7a;
+  --azure-light:  #4a9fd4;
+  --gold:         #c9963a;
+  --gold-light:   #e8b85a;
+  --sand:         #f5ead6;
+  --sand-dark:    #e8d4b0;
+  --cream:        #fdf8f0;
+  --text:         #1c2b3a;
+  --text-light:   #5a7080;
+  --white:        #ffffff;
+
+  --sidebar-w:    68px;
+  --sidebar-open: 210px;
+  --radius:       12px;
+  --shadow:       0 4px 24px rgba(26,111,168,.13);
+  --shadow-card:  0 8px 32px rgba(26,111,168,.10);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(ellipse at 80% 0%, rgba(26,111,168,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(201,150,58,.06) 0%, transparent 50%);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text);
+  margin-left: var(--sidebar-w);
+  transition: margin-left .3s ease;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 900px) { body { font-size: large; } }
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--azure-dark);
+  letter-spacing: .02em;
+  line-height: 1.15;
+  padding: .4em 0 .2em 1em;
+}
+h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--azure);
+  margin-bottom: .6em;
+}
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--azure-dark);
+  margin-bottom: .5em;
+  text-align: left;
+}
+h4 { font-size: 1rem; color: var(--text-light); font-weight: 500; }
+p  { line-height: 1.75; color: var(--text-light); font-size: .97rem; }
+a  { color: var(--azure); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--gold); }
+
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, var(--azure-light), var(--gold-light), transparent);
+  margin: 0;
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100%;
+  width: var(--sidebar-w);
+  background: linear-gradient(180deg, var(--azure-dark) 0%, #0a3a5c 100%);
+  overflow-x: hidden;
+  transition: width .35s cubic-bezier(.4,0,.2,1);
+  z-index: 1000;
+  box-shadow: 4px 0 20px rgba(0,0,0,.18);
+}
+.sidebar:hover, .sidebar.open { width: var(--sidebar-open); }
+.sidebar:hover .nav-links a, .sidebar.open .nav-links a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toggle-btn {
+  font-size: 26px;
+  color: rgba(255,255,255,.85);
+  text-align: center;
+  padding: 18px 0;
+  cursor: pointer;
+  transition: color .2s;
+  user-select: none;
+}
+.toggle-btn:hover { color: var(--gold-light); }
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,.8);
+  padding: 14px 18px;
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .3s ease, transform .3s ease, background .2s;
+  font-size: .9rem;
+  letter-spacing: .03em;
+}
+.nav-links a:hover, .nav-links a.active {
+  background: rgba(255,255,255,.1);
+  color: var(--gold-light);
+  border-right: 3px solid var(--gold-light);
+}
+
+/* ─── Hero ─── */
+#home { padding: 0; }
+.hero-img-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(200px, 40vw, 420px);
+  overflow: hidden;
+}
+.hero-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+.hero-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(10,30,50,.55) 100%);
+}
+.hero-caption {
+  position: absolute;
+  bottom: 1.5em; left: 2em;
+  color: rgba(255,255,255,.85);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: .05em;
+}
+
+/* ─── Sections ─── */
+section {
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 3.5rem);
+}
+
+/* ─── Einleitung ─── */
+#Einleitung {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  margin: 2rem clamp(.5rem,3vw,2.5rem);
+  padding: 2rem 2.5rem;
+  border-left: 4px solid var(--gold);
+  position: relative;
+}
+#Einleitung::before {
+  content: '"';
+  font-family: var(--font-display);
+  font-size: 6rem;
+  color: var(--sand-dark);
+  position: absolute;
+  top: -.5rem; left: 1rem;
+  line-height: 1;
+  z-index: 0;
+}
+#Einleitung p { position: relative; z-index: 1; font-size: 1rem; }
+
+caption.wide-caption {
+  font-size: .8em;
+  font-style: italic;
+  color: var(--text-light);
+  display: block;
+  margin-top: 1rem;
+}
+
+/* ─── About Grid ─── */
+#about { background: var(--sand); }
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  max-width: 960px;
+}
+.grid-item-sidebar, .grid-item-main {
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow);
+}
+.grid-item-sidebar {
+  background: linear-gradient(135deg, var(--azure) 0%, var(--azure-dark) 100%);
+  color: var(--white);
+}
+.grid-item-sidebar h3 { color: var(--gold-light); text-align: left; }
+.grid-item-sidebar p  { color: rgba(255,255,255,.85); }
+.grid-item-main {
+  background: var(--white);
+  border-top: 3px solid var(--gold);
+}
+.grid-item-main h3 { color: var(--azure-dark); }
+
+/* ─── Services ─── */
+#services { background: var(--cream); }
+.grid-item-bottom {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  max-width: 600px;
+}
+.grid-item-bottom ul { list-style: none; margin-top: 1rem; }
+.grid-item-bottom ul li {
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--sand-dark);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.grid-item-bottom ul li::before {
+  content: '◆';
+  color: var(--gold);
+  font-size: .55rem;
+}
+
+/* ─── Comment / CTA ─── */
+.comment {
+  margin: 0;
+  padding: 2rem clamp(1rem,4vw,3.5rem);
+  background: linear-gradient(135deg, var(--azure-dark) 0%, #1a5f8a 100%);
+  color: rgba(255,255,255,.88);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.9;
+}
+
+/* ─── Toggle Text Button ─── */
+.hidden { display: none; }
+#mehrText {
+  background: var(--azure-dark);
+  color: var(--gold-light);
+  border-radius: var(--radius);
+  padding: 1rem 1.5rem;
+  margin: .8rem 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  display: none;
+}
+.toggle-text-btn {
+  background: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: .6rem 1.4rem;
+  font-family: var(--font-body);
+  font-size: .88rem;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  letter-spacing: .04em;
+}
+.toggle-text-btn:hover { background: var(--gold); transform: translateY(-1px); }
+
+.secret-section { padding: 1.5rem clamp(1rem,4vw,3.5rem); background: var(--cream); }
+
+/* ─── Abschluss ─── */
+.abschluss-section { background: var(--sand); }
+
+/* ─── Footer ─── */
+#site-footer {
+  background: linear-gradient(180deg, #0a2a40 0%, #061825 100%);
+  color: rgba(255,255,255,.75);
+  padding: 0;
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 3rem clamp(1rem,4vw,3.5rem) 2rem;
+}
+.contact h3 {
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  text-align: left;
+  margin-bottom: .8rem;
+}
+.contact address { font-style: normal; line-height: 2; font-size: .9rem; }
+.contact a, .social a { color: var(--azure-light); }
+.contact a:hover, .social a:hover { color: var(--gold-light); }
+.social h4 { color: rgba(255,255,255,.5); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .8rem; }
+.social-list { list-style: none; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.social-list li a {
+  font-size: .9rem;
+  padding: .35rem .8rem;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 6px;
+  transition: border-color .2s, color .2s;
+}
+.social-list li a:hover { border-color: var(--gold); color: var(--gold-light); }
+#site-footer small {
+  display: block;
+  text-align: center;
+  padding: 1.2rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.35);
+  font-size: .8rem;
+  letter-spacing: .06em;
+}
+
+.visually-hidden {
+  position: absolute; width:1px; height:1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 700px) {
+  body { margin-left: var(--sidebar-w); }
+  .container { grid-template-columns: 1fr; }
+  h1 { padding-left: .5em; }
+  #Einleitung { margin: 1rem .5rem; padding: 1.5rem 1.2rem; }
+  #Einleitung::before { font-size: 4rem; }
+  .footer-inner { flex-direction: column; gap: 1.5rem; }
+  .hero-caption { left: 1em; font-size: .85rem; }
+}
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  section { padding: 1.2rem 1rem; }
+  .comment { padding: 1.5rem 1rem; }
+}
+
+/* ─── Zusatz: Denker-Karten (Strömungen) ─── */
+.denker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.denker-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow);
+  border-top: 3px solid var(--azure-light);
+  transition: transform .2s, box-shadow .2s;
+}
+.denker-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+.denker-card .era {
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: .4rem;
+}
+.denker-card h3 { font-size: 1.2rem; margin-bottom: .4rem; }
+.denker-card p { font-size: .88rem; }
+
+/* ─── Zitat-Block ─── */
+.zitat-block {
+  border-left: 3px solid var(--gold);
+  margin: 1.5rem 0;
+  padding: .8rem 1.2rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--azure-dark);
+  background: rgba(201,150,58,.06);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.zitat-block cite {
+  display: block;
+  margin-top: .5rem;
+  font-size: .82rem;
+  font-style: normal;
+  color: var(--text-light);
+  letter-spacing: .04em;
+}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
+<nav class="sidebar" id="sidebar" aria-label="Hauptnavigation">
+  <div class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" aria-label="Menü öffnen">☰</div>
+  <div class="nav-links">
+    <a href="#home"       class="active">🏛 Startseite</a>
+    <a href="#Einleitung">📜 Einleitung</a>
+    <a href="#about">     👤 Über die Philosophie</a>
+    <a href="#stroemungen">🌊 Strömungen</a>
+    <a href="#services">  📚 Themenfelder</a>
+    <a href="#abschluss"> ✦ Abschluss</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section id="home">
+  <div class="hero-img-wrap">
+    <!-- SVG-Platzhalter: Antike Säulenhalle in Azur & Gold -->
+    <svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#0d4f7a"/>
+          <stop offset="100%" stop-color="#1a6fa8"/>
+        </linearGradient>
+        <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#c9963a" stop-opacity=".3"/>
+          <stop offset="100%" stop-color="#0a3a5c"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+          <stop offset="0%"   stop-color="#e8b85a" stop-opacity=".18"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <!-- Himmel -->
+      <rect width="1200" height="420" fill="url(#skyGrad)"/>
+      <rect width="1200" height="420" fill="url(#glow)"/>
+      <!-- Sterne -->
+      <circle cx="80"  cy="40"  r="1.5" fill="white" opacity=".6"/>
+      <circle cx="200" cy="25"  r="1"   fill="white" opacity=".5"/>
+      <circle cx="350" cy="55"  r="1.5" fill="white" opacity=".7"/>
+      <circle cx="600" cy="18"  r="1"   fill="white" opacity=".4"/>
+      <circle cx="900" cy="35"  r="2"   fill="white" opacity=".6"/>
+      <circle cx="1050"cy="20"  r="1.5" fill="white" opacity=".5"/>
+      <circle cx="1150"cy="50"  r="1"   fill="white" opacity=".6"/>
+      <!-- Boden -->
+      <rect y="350" width="1200" height="70" fill="url(#floorGrad)"/>
+      <!-- Säulen -->
+      <g fill="#f5ead6" opacity=".9">
+        <!-- Säule 1 -->
+        <rect x="100" y="100" width="28" height="260" rx="4"/>
+        <rect x="90"  y="96"  width="48" height="14"  rx="3"/>
+        <rect x="85"  y="82"  width="58" height="16"  rx="3"/>
+        <!-- Säule 2 -->
+        <rect x="220" y="120" width="28" height="240" rx="4"/>
+        <rect x="210" y="116" width="48" height="14"  rx="3"/>
+        <rect x="205" y="102" width="58" height="16"  rx="3"/>
+        <!-- Säule 3 -->
+        <rect x="900" y="100" width="28" height="260" rx="4"/>
+        <rect x="890" y="96"  width="48" height="14"  rx="3"/>
+        <rect x="885" y="82"  width="58" height="16"  rx="3"/>
+        <!-- Säule 4 -->
+        <rect x="1020" y="120" width="28" height="240" rx="4"/>
+        <rect x="1010" y="116" width="48" height="14"  rx="3"/>
+        <rect x="1005" y="102" width="58" height="16"  rx="3"/>
+      </g>
+      <!-- Architrav -->
+      <rect x="85"  y="68" width="200" height="16" fill="#e8d4b0" rx="2" opacity=".85"/>
+      <rect x="885" y="68" width="170" height="16" fill="#e8d4b0" rx="2" opacity=".85"/>
+      <!-- Mond -->
+      <circle cx="650" cy="80" r="36" fill="#fdf8f0" opacity=".12"/>
+      <circle cx="662" cy="74" r="30" fill="#0d4f7a"/>
+      <!-- Titel-Text im Bild -->
+      <text x="600" y="230" text-anchor="middle" font-family="Georgia, serif"
+            font-size="52" font-weight="300" fill="white" opacity=".88" letter-spacing="3">
+        Philosophia
+      </text>
+      <text x="600" y="275" text-anchor="middle" font-family="Georgia, serif"
+            font-size="18" fill="#e8b85a" opacity=".9" letter-spacing="8" font-style="italic">
+        Die Liebe zur Weisheit
+      </text>
+    </svg>
+    <div class="hero-img-overlay"></div>
+    <p class="hero-caption">„Das Staunen ist der Anfang der Philosophie." — Aristoteles</p>
+  </div>
+  <h1>Philosophie</h1>
+  <hr/>
+</section>
+
+<!-- ══════════════════════ EINLEITUNG ══════════════════════ -->
+<section id="Einleitung">
+  <h2>Einleitung</h2>
+  <p>
+    Die Philosophie — griechisch <em>philosophía</em>, „Liebe zur Weisheit" — ist eine der ältesten und
+    beharrlichsten Unternehmungen des menschlichen Geistes. Sie fragt nach dem, was <em>ist</em>,
+    was <em>sein soll</em> und was wir überhaupt <em>wissen können</em>. Ihre Fragen entstehen dort,
+    wo das Selbstverständliche aufhört, selbstverständlich zu sein.
+  </p>
+  <br/>
+  <p>
+    Im Unterschied zu den Einzelwissenschaften, die bestimmte Ausschnitte der Wirklichkeit unter
+    festgelegten Methoden untersuchen, richtet die Philosophie ihren Blick auf die Voraussetzungen
+    selbst: auf die Grundbegriffe, die Erkenntnisformen und die Werte, mit denen wir urteilen.
+  </p>
+  <div class="zitat-block" style="margin-top:1.5rem;">
+    Das untersuchte Leben ist nicht lebenswert.
+    <cite>— Sokrates (nach Platon, Apologie 38a)</cite>
+  </div>
+</section>
+
+<!-- ══════════════════════ ÜBER DIE PHILOSOPHIE ══════════════════════ -->
+<section id="about">
+  <h2>Über die Philosophie</h2>
+  <div class="container">
+    <div class="grid-item-sidebar">
+      <h3>Drei Grundfragen</h3>
+      <p><strong>Was kann ich wissen?</strong><br/>Erkenntnistheorie &amp; Metaphysik</p>
+      <br/>
+      <p><strong>Was soll ich tun?</strong><br/>Ethik &amp; praktische Philosophie</p>
+      <br/>
+      <p><strong>Was darf ich hoffen?</strong><br/>Religionsphilosophie &amp; Anthropologie</p>
+    </div>
+    <div class="grid-item-main">
+      <h3>Philosophie als Lebensform</h3>
+      <p>
+        Für die antiken Griechen war Philosophie keine akademische Disziplin, sondern eine
+        <em>Lebensform</em>. Sokrates philosophierte auf dem Marktplatz, Epiktet in der Stoa,
+        Marc Aurel in seinem kaiserlichen Feldlager. Das Ziel war nicht das System, sondern
+        die Transformation des Selbst — ein Leben im Einklang mit der Vernunft.
+      </p>
+      <br/>
+      <p>
+        Diese Idee lebt in der modernen Philosophie weiter: von Simone de Beauvoirs
+        existenzialistischem Engagement bis zu Iris Murdochs Ethik der Aufmerksamkeit.
+        Philosophieren heißt, die eigenen Überzeugungen zu befragen — und auszuhalten,
+        dass manche Fragen keine endgültigen Antworten kennen.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ STRÖMUNGEN ══════════════════════ -->
+<section id="stroemungen" style="background: var(--cream);">
+  <h2>Große Strömungen</h2>
+  <div class="denker-grid">
+    <div class="denker-card">
+      <p class="era">Antike · 470–322 v. Chr.</p>
+      <h3>Sokratik &amp; Platonismus</h3>
+      <p>Das Gute, das Schöne und das Wahre als transzendente Ideen; Erkenntnis als Anamnesis.</p>
+    </div>
+    <div class="denker-card">
+      <p class="era">Hellenismus · 300 v. Chr.</p>
+      <h3>Stoa &amp; Epikureismus</h3>
+      <p>Seelenruhe durch Vernunft und Selbstbeherrschung; Glück als Befreiung von Schmerz.</p>
+    </div>
+    <div class="denker-card">
+      <p class="era">Neuzeit · 17.–18. Jh.</p>
+      <h3>Rationalismus &amp; Empirismus</h3>
+      <p>Descartes, Spinoza, Leibniz contra Locke, Berkeley, Hume — Vernunft versus Erfahrung.</p>
+    </div>
+    <div class="denker-card">
+      <p class="era">Aufklärung · 1781</p>
+      <h3>Kantischer Kritizismus</h3>
+      <p>Die Bedingungen der Möglichkeit von Erkenntnis; der kategorische Imperativ als Grundlage der Moral.</p>
+    </div>
+    <div class="denker-card">
+      <p class="era">19. Jahrhundert</p>
+      <h3>Idealismus &amp; Materialismus</h3>
+      <p>Hegels Geistphilosophie im Widerstreit mit Marxens materialistischer Dialektik.</p>
+    </div>
+    <div class="denker-card">
+      <p class="era">20./21. Jh.</p>
+      <h3>Existenzialismus &amp; Analytik</h3>
+      <p>Heidegger, Sartre, de Beauvoir — und der linguistic turn der analytischen Tradition.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ COMMENT / ZITAT ══════════════════════ -->
+<div class="comment">
+  „Ich weiß, dass ich nichts weiß — aber dieses Wissen ist bereits der erste Schritt aus der Dunkelheit."<br/>
+  <span style="font-size:.85rem; opacity:.7; letter-spacing:.06em;">— In Anlehnung an Sokrates</span>
+</div>
+<hr/>
+
+<!-- ══════════════════════ THEMENFELDER ══════════════════════ -->
+<section id="services">
+  <h2>Themenfelder der Philosophie</h2>
+  <div class="grid-item-bottom">
+    <h3>Klassische Disziplinen</h3>
+    <ul>
+      <li>Metaphysik — Lehre vom Sein und der Wirklichkeit</li>
+      <li>Erkenntnistheorie — Was können wir wissen und wie?</li>
+      <li>Ethik — Was ist das gute und richtige Handeln?</li>
+      <li>Ästhetik — Das Schöne, das Erhabene, die Kunst</li>
+      <li>Logik — Formen des korrekten Schließens</li>
+      <li>Politische Philosophie — Gerechtigkeit, Macht, Staat</li>
+      <li>Philosophie des Geistes — Bewusstsein, Qualia, KI</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════ MEHR-TEXT TOGGLE ══════════════════════ -->
+<div class="secret-section">
+  <button class="toggle-text-btn" onclick="toggleMehr()">Ein philosophischer Gedanke mehr …</button>
+  <div id="mehrText">
+    Wittgenstein schrieb am Ende des Tractatus: „Worüber man nicht sprechen kann, darüber muss man
+    schweigen." Doch die Philosophie lebt genau von jenem Impuls, das Schweigen zu durchbrechen —
+    behutsam, mit Begriffen wie Sonden ins Unbekannte.
+  </div>
+</div>
+
+<!-- ══════════════════════ ABSCHLUSS ══════════════════════ -->
+<section class="abschluss-section" id="abschluss">
+  <h2>Abschluss</h2>
+  <p>
+    Philosophie ist kein abgeschlossenes Gebäude, das man besichtigt und wieder verlässt.
+    Sie ist ein Weg — manchmal steil, manchmal labyrinthisch — der nirgendwo endet und
+    gerade darin seinen Wert hat. Wer einmal ernsthaft gefragt hat, warum es überhaupt
+    etwas gibt und nicht nichts, der sieht die Welt nicht mehr ganz unverändert.
+  </p>
+  <br/>
+  <div class="zitat-block">
+    Die Philosophie backt kein Brot — aber sie kann uns zeigen, was Brot bedeutet,
+    wem es zusteht und ob es der Mühe wert ist, dafür zu arbeiten.
+    <cite>— Frei nach Heinrich Heine</cite>
+  </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="contact">
+      <h3>Kontakt</h3>
+      <address>
+        Philosophisches Institut<br/>
+        Universitätsring 1, 1010 Wien<br/>
+        <a href="mailto:info@philosophie.example.at">info@philosophie.example.at</a><br/>
+        <a href="tel:+431427746000">+43 1 4277 46000</a>
+      </address>
+    </div>
+    <div class="social">
+      <h4>Verknüpfungen</h4>
+      <ul class="social-list">
+        <li><a href="#">Academia</a></li>
+        <li><a href="#">PhilPapers</a></li>
+        <li><a href="#">SEP</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <small>© 2026 Philosophia — Alle Rechte vorbehalten</small>
+</footer>
+
+<!-- ══════════════════════ JS ══════════════════════ -->
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  function toggleMehr() {
+    const el  = document.getElementById('mehrText');
+    const btn = document.querySelector('.toggle-text-btn');
+    const vis = el.style.display === 'block';
+    el.style.display  = vis ? 'none' : 'block';
+    btn.textContent   = vis ? 'Ein philosophischer Gedanke mehr …' : 'Weniger anzeigen';
+  }
+
+  // Aktiven Nav-Link beim Scrollen hervorheben
+  const sections = document.querySelectorAll('section[id], .abschluss-section[id]');
+  const links    = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    links.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
