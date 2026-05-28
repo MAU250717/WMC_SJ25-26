@@ -793,3 +793,52 @@ body.vektorrechner-page {
   .op-btn { padding: .65rem 1.2rem; font-size: .85rem; }
 }
 
+.denker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.denker-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow);
+  border-top: 3px solid var(--azure-light);
+  transition: transform .2s, box-shadow .2s;
+}
+.denker-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+.denker-card .era {
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: .4rem;
+}
+.denker-card h3 { font-size: 1.2rem; margin-bottom: .4rem; }
+.denker-card p { font-size: .88rem; }
+
+/* ─── Zitat-Block ─── */
+.zitat-block {
+  border-left: 3px solid var(--gold);
+  margin: 1.5rem 0;
+  padding: .8rem 1.2rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--azure-dark);
+  background: rgba(201,150,58,.06);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.zitat-block cite {
+  display: block;
+  margin-top: .5rem;
+  font-size: .82rem;
+  font-style: normal;
+  color: var(--text-light);
+  letter-spacing: .04em;
+}
